@@ -8,11 +8,22 @@
 
 using namespace std;
 
-void Process(char* str, char* newStr, bool &changed) {
+bool Find(char* str) {
+    if (str[0] == 0) return false;
+
+    for (int i = 1; str[i] > 0; i++) {
+        if (str[i] == str[i - 1]) {
+            if (str[i] == 'a' || str[i] == 'b' || str[i] == 'c') return true;
+        }
+    }
+
+    return false;
+}
+
+void Process(char* str, char* newStr) {
     char state = ' ';
     int strPos = 0;
     int newStrPos = 0;
-    changed = false;
 
     while (str[strPos] > 0) {
         switch (str[strPos]) {
@@ -21,7 +32,6 @@ void Process(char* str, char* newStr, bool &changed) {
                 newStr[newStrPos++] = '*';
                 newStr[newStrPos++] = '*';
                 newStr[newStrPos++] = '*';
-                changed = true;
                 state = ' ';
             }
             else {
@@ -35,7 +45,6 @@ void Process(char* str, char* newStr, bool &changed) {
                 newStr[newStrPos++] = '*';
                 newStr[newStrPos++] = '*';
                 newStr[newStrPos++] = '*';
-                changed = true;
                 state = ' ';
             }
             else {
@@ -49,7 +58,6 @@ void Process(char* str, char* newStr, bool &changed) {
                 newStr[newStrPos++] = '*';
                 newStr[newStrPos++] = '*';
                 newStr[newStrPos++] = '*';
-                changed = true;
                 state = ' ';
             }
             else {
@@ -78,12 +86,12 @@ void Process(char* str, char* newStr, bool &changed) {
 int main() {
     char str[101];
     char newStr[151];
-    bool changed;
 
     cout << "Enter string:" << endl;
     cin.getline(str, 100);
 
-    Process(str, newStr, changed);
+    bool changed = Find(str);
+    Process(str, newStr);
 
     cout << "String: " << str << endl << endl;
     if (changed) {
