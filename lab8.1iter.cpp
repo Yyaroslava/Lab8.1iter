@@ -9,14 +9,14 @@
 using namespace std;
 
 bool Find(char* str) {
-    if (str[0] == 0) return false;
-
+    // перевірка, що рядок не закінчився
+    if (str[0] == 0) return false; 
     for (int i = 1; str[i] > 0; i++) {
+        // порівнюємо символ з попереднім, тому цикл починається з 1
         if (str[i] == str[i - 1]) {
             if (str[i] == 'a' || str[i] == 'b' || str[i] == 'c') return true;
         }
     }
-
     return false;
 }
 
